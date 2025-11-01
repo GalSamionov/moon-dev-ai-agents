@@ -156,4 +156,4 @@ Only need XAI_API_KEY if using single model mode with XAI.
 
 ---
 
-**Built by Moon Dev** | Part of the moon-dev-ai-agents-for-trading system
+**Built by Moon Dev** | Part of the moon-dev-ai-agents system

@@ -131,8 +131,12 @@ The RBI Agent takes your trading ideas (from YouTube videos, PDFs, or plain text
 
 ### Step 2: 💻 Clone to Your Machine
 ```bash
-git clone https://github.com/YOUR_USERNAME/moon-dev-ai-agents-for-trading.git
-cd moon-dev-ai-agents-for-trading
+# Clone the upstream repo directly
+git clone https://github.com/moon-dev/moon-dev-ai-agents.git
+cd moon-dev-ai-agents
+
+# If you forked it, replace "moon-dev" with your GitHub username in the URL
+# git clone https://github.com/YOUR_USERNAME/moon-dev-ai-agents.git
 ```
 
 **Recommended IDEs:**

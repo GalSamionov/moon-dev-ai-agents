@@ -1,6 +1,6 @@
 # Polymarket AI Agents - Roadmap
 
-Dr. Data Dawg's master plan for intelligent Polymarket trading agents. Building on the proven strategies from the existing bot infrastructure and the AI agent framework from moon-dev-ai-agents-for-trading.
+Dr. Data Dawg's master plan for intelligent Polymarket trading agents. Building on the proven strategies from the existing bot infrastructure and the AI agent framework from moon-dev-ai-agents.
 
 ---
 
@@ -29,9 +29,9 @@ Dr. Data Dawg's master plan for intelligent Polymarket trading agents. Building 
 
 **Existing Assets to Leverage:**
 ```
-/Users/md/Dropbox/dev/github/moon-dev-ai-agents-for-trading/src/agents/sentiment_agent.py
-/Users/md/Dropbox/dev/github/moon-dev-ai-agents-for-trading/src/agents/tweet_agent.py
-/Users/md/Dropbox/dev/github/moon-dev-ai-agents-for-trading/src/agents/research_agent.py
+/Users/md/Dropbox/dev/github/moon-dev-ai-agents/src/agents/sentiment_agent.py
+/Users/md/Dropbox/dev/github/moon-dev-ai-agents/src/agents/tweet_agent.py
+/Users/md/Dropbox/dev/github/moon-dev-ai-agents/src/agents/research_agent.py
 ```
 
 **What to build:**
@@ -54,8 +54,8 @@ Dr. Data Dawg's master plan for intelligent Polymarket trading agents. Building 
 
 **Existing Assets to Leverage:**
 ```
-/Users/md/Dropbox/dev/github/moon-dev-ai-agents-for-trading/src/agents/swarm_agent.py
-/Users/md/Dropbox/dev/github/moon-dev-ai-agents-for-trading/src/agents/base_agent.py
+/Users/md/Dropbox/dev/github/moon-dev-ai-agents/src/agents/swarm_agent.py
+/Users/md/Dropbox/dev/github/moon-dev-ai-agents/src/agents/base_agent.py
 ```
 
 **What to build:**
@@ -212,7 +212,7 @@ python fetch_all_markets.py
 **AI Framework:**
 - Claude 4.5, GPT-5, Gemini 2.5, Grok-4, DeepSeek, DeepSeek-R1
 - Swarm consensus voting
-- BaseAgent architecture (from moon-dev-ai-agents-for-trading)
+- BaseAgent architecture (from moon-dev-ai-agents)
 
 **Data Sources:**
 - Polymarket API (markets, order book, trades)
