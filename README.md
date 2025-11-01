@@ -107,6 +107,23 @@ Project updates will be posted in Discord, join here: [discord.gg/8UPuVZ53bh](ht
 
 ---
 
+## 🛠️ Zero-to-Running Checklist (5 Steps)
+If you're wondering "Do I download or clone, and how do I run this?" start here:
+
+1. **Get the code** – either
+   - Clone the repo: `git clone https://github.com/moon-dev/moon-dev-ai-agents.git`
+   - *or* download the ZIP from GitHub → extract it → open the `moon-dev-ai-agents` folder.
+2. **Open a terminal** inside that folder and (optionally) create/activate a virtual environment.
+3. **Install dependencies:** `pip install -r requirements.txt` (Python 3.10.9 recommended).
+4. **Copy `.env.example` to `.env`** and add at least one AI model key (Anthropic/OpenAI/DeepSeek/etc.) plus any market-data keys you plan to use.
+5. **Run something:**
+   - CLI workflow: `python -m src.projects.strategy_intel_hub.cli --help`
+   - Web dashboard: `python -m src.projects.strategy_intel_hub.web_cli --port 8083`
+
+> Need updates later? Run `git pull` inside the repo. Want to stop the workflows? Press `Ctrl+C` in the terminal window where they’re running.
+
+---
+
 ## 🚀 Quick Start Guide - RBI Backtesting Agent
 
 **Why Start with Backtesting?**
@@ -129,21 +146,31 @@ The RBI Agent takes your trading ideas (from YouTube videos, PDFs, or plain text
 - Fork to your GitHub account to get your own copy
 - This lets you make changes and track updates
 
-### Step 2: 💻 Clone to Your Machine
+### Step 2: 💻 Get the Code on Your Machine
 ```bash
-# Clone the upstream repo directly
+# Option A – clone the upstream repo (recommended)
 git clone https://github.com/moon-dev/moon-dev-ai-agents.git
 cd moon-dev-ai-agents
 
-# If you forked it, replace "moon-dev" with your GitHub username in the URL
+# Option B – clone your fork if you created one
 # git clone https://github.com/YOUR_USERNAME/moon-dev-ai-agents.git
+# cd moon-dev-ai-agents
 ```
+
+Prefer a ZIP download? Click the green **Code** button on GitHub → **Download ZIP**,
+extract it, and open the resulting `moon-dev-ai-agents` folder in your terminal.
 
 > 💡 **Seeing `Repository not found`?** Double-check that the repository name is
 > `moon-dev-ai-agents` (not "moon-dev-ai-agents-for-trading") and that you have
 > access to the URL. For private forks, sign into GitHub first. You can always
 > point a fork back to the upstream repo later with
 > `git remote add upstream https://github.com/moon-dev/moon-dev-ai-agents.git`.
+
+### Step 2.5: 🔁 Already cloned but need the latest changes?
+```bash
+cd moon-dev-ai-agents
+git pull origin main  # replace 'origin' if your remote has a different name
+```
 
 **Recommended IDEs:**
 - [Cursor](https://www.cursor.com/) - AI-enabled coding
