@@ -139,6 +139,12 @@ cd moon-dev-ai-agents
 # git clone https://github.com/YOUR_USERNAME/moon-dev-ai-agents.git
 ```
 
+> 💡 **Seeing `Repository not found`?** Double-check that the repository name is
+> `moon-dev-ai-agents` (not "moon-dev-ai-agents-for-trading") and that you have
+> access to the URL. For private forks, sign into GitHub first. You can always
+> point a fork back to the upstream repo later with
+> `git remote add upstream https://github.com/moon-dev/moon-dev-ai-agents.git`.
+
 **Recommended IDEs:**
 - [Cursor](https://www.cursor.com/) - AI-enabled coding
 - [Windsurfer](https://codeium.com/) - AI-enabled coding
