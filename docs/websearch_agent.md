@@ -233,7 +233,7 @@ python src/agents/websearch_agent.py
 Edit `src/agents/rbi_agent_pp_multi.py` (lines 102-103):
 ```python
 STRATEGIES_FROM_FILES = True
-STRATEGIES_FOLDER = "/Users/md/Dropbox/dev/github/moon-dev-ai-agents-for-trading/src/data/web_search_research/final_strategies"
+STRATEGIES_FOLDER = "/Users/md/Dropbox/dev/github/moon-dev-ai-agents/src/data/web_search_research/final_strategies"
 ```
 
 3. **Run RBI agent**:

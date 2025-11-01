@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Strategy Intelligence Hub</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #0f172a;
+        --panel: rgba(15, 23, 42, 0.72);
+        --accent: #38bdf8;
+        --accent-muted: rgba(56, 189, 248, 0.2);
+        --text: #f8fafc;
+        --muted: #94a3b8;
+        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      body {
+        margin: 0;
+        background: linear-gradient(140deg, #020617 0%, #0f172a 100%);
+        color: var(--text);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      header {
+        padding: 2.5rem 1.5rem 1rem;
+        text-align: center;
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: clamp(2rem, 3vw, 2.8rem);
+        letter-spacing: -0.02em;
+      }
+
+      header p {
+        margin-top: 0.4rem;
+        color: var(--muted);
+        font-size: 1rem;
+      }
+
+      main {
+        width: min(1100px, 92vw);
+        margin: 0 auto 3rem;
+        display: grid;
+        gap: 1.5rem;
+      }
+
+      .card {
+        background: var(--panel);
+        backdrop-filter: blur(16px);
+        border: 1px solid var(--accent-muted);
+        border-radius: 18px;
+        padding: 1.5rem;
+        box-shadow: 0 30px 60px rgba(2, 6, 23, 0.45);
+      }
+
+      .card h2 {
+        margin-top: 0;
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+        letter-spacing: 0.02em;
+      }
+
+      .status-grid {
+        display: grid;
+        gap: 0.9rem;
+      }
+
+      .status-grid div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem 1rem;
+        border-radius: 12px;
+        background: rgba(15, 23, 42, 0.7);
+        border: 1px solid rgba(148, 163, 184, 0.15);
+      }
+
+      .status-label {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .status-value {
+        font-weight: 600;
+        font-size: 1rem;
+      }
+
+      .agent-list {
+        display: grid;
+        gap: 0.6rem;
+      }
+
+      .agent-item {
+        padding: 0.75rem 1rem;
+        border-radius: 12px;
+        background: rgba(30, 41, 59, 0.6);
+        border: 1px solid rgba(148, 163, 184, 0.12);
+      }
+
+      .agent-item span {
+        display: block;
+        font-size: 0.85rem;
+        color: var(--muted);
+        margin-top: 0.3rem;
+      }
+
+      .events-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.95rem;
+      }
+
+      .events-table thead {
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+      }
+
+      .events-table th,
+      .events-table td {
+        padding: 0.75rem;
+        text-align: left;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+        vertical-align: top;
+      }
+
+      .events-table tbody tr:hover {
+        background: rgba(56, 189, 248, 0.05);
+      }
+
+      .event-tag {
+        padding: 0.25rem 0.55rem;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+      }
+
+      .event-tag.research {
+        background: rgba(6, 182, 212, 0.12);
+        color: #67e8f9;
+        border: 1px solid rgba(6, 182, 212, 0.35);
+      }
+
+      .event-tag.intelligence {
+        background: rgba(74, 222, 128, 0.12);
+        color: #a7f3d0;
+        border: 1px solid rgba(74, 222, 128, 0.35);
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 1.5rem;
+        color: var(--muted);
+        font-size: 0.95rem;
+        border: 1px dashed rgba(148, 163, 184, 0.35);
+        border-radius: 12px;
+      }
+
+      .status-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.4rem 0.7rem;
+        background: rgba(74, 222, 128, 0.1);
+        color: #bbf7d0;
+        border-radius: 999px;
+        border: 1px solid rgba(74, 222, 128, 0.35);
+        font-size: 0.85rem;
+        font-weight: 600;
+      }
+
+      .status-pill.offline {
+        background: rgba(248, 113, 113, 0.1);
+        color: #fecaca;
+        border-color: rgba(248, 113, 113, 0.35);
+      }
+
+      .status-footer {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 1.2rem;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+
+      @media (min-width: 900px) {
+        main {
+          grid-template-columns: 0.9fr 1.1fr;
+        }
+
+        .card.full-width {
+          grid-column: 1 / -1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Strategy Intelligence Hub</h1>
+      <p>Live view of research ideas, RBI backtests, and market intelligence sweeps.</p>
+    </header>
+
+    <main>
+      <section class="card" id="status-card">
+        <h2>Pipeline Configuration</h2>
+        <div class="status-grid" id="status-grid"></div>
+        <div class="status-footer">
+          <span id="sse-status" class="status-pill offline">Connecting…</span>
+          <span id="last-update">Awaiting events</span>
+        </div>
+      </section>
+
+      <section class="card" id="agents-card">
+        <h2>Monitored Agents</h2>
+        <div class="agent-list" id="agent-list"></div>
+      </section>
+
+      <section class="card full-width">
+        <h2>Recent Activity</h2>
+        <div id="events-empty" class="empty-state">No events captured yet.</div>
+        <div style="overflow-x: auto">
+          <table class="events-table" id="events-table" hidden>
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Type</th>
+                <th>Summary</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody id="events-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const statusGrid = document.getElementById("status-grid");
+      const agentList = document.getElementById("agent-list");
+      const eventsBody = document.getElementById("events-body");
+      const eventsTable = document.getElementById("events-table");
+      const emptyState = document.getElementById("events-empty");
+      const sseStatus = document.getElementById("sse-status");
+      const lastUpdate = document.getElementById("last-update");
+
+      function renderStatus(data) {
+        statusGrid.innerHTML = "";
+        const research = data.research;
+        const intelligence = data.intelligence;
+
+        const blocks = [
+          {
+            label: "Research cadence",
+            value: `${research.cycle_minutes} min`
+          },
+          {
+            label: "Backtests",
+            value: research.enable_backtests ? "Enabled" : "Skipped"
+          },
+          {
+            label: "Idea retries",
+            value: research.idea_retry_limit
+          },
+          {
+            label: "Intel cadence",
+            value: `${intelligence.cycle_minutes} min`
+          },
+          {
+            label: "Agent cooldown",
+            value: `${intelligence.agent_cooldown_seconds} s`
+          },
+          {
+            label: "Failure threshold",
+            value: intelligence.max_consecutive_failures
+          }
+        ];
+
+        for (const block of blocks) {
+          const row = document.createElement("div");
+          row.innerHTML = `<span class="status-label">${block.label}</span><span class="status-value">${block.value}</span>`;
+          statusGrid.appendChild(row);
+        }
+
+        agentList.innerHTML = "";
+        if (data.market_agents.length === 0) {
+          agentList.innerHTML = '<div class="empty-state">No market intelligence agents configured.</div>';
+        } else {
+          for (const agent of data.market_agents) {
+            const item = document.createElement("div");
+            item.className = "agent-item";
+            const desc = agent.description ? `<span>${agent.description}</span>` : "";
+            item.innerHTML = `<strong>${agent.name}</strong>${desc}`;
+            agentList.appendChild(item);
+          }
+        }
+      }
+
+      function normaliseSummary(event) {
+        if (event.event === "research") {
+          if (event.idea) {
+            return event.idea;
+          }
+          if (event.error) {
+            return `No idea generated (reason: ${event.error})`;
+          }
+          return "Research cycle completed.";
+        }
+
+        if (event.event === "intelligence") {
+          if (event.success && event.result) {
+            return JSON.stringify(event.result).slice(0, 140);
+          }
+          if (!event.success && event.error) {
+            return `Failure: ${event.error}`;
+          }
+          return "Completed intelligence sweep.";
+        }
+        return "";
+      }
+
+      function renderEvent(event) {
+        if (emptyState) {
+          emptyState.hidden = true;
+          emptyState.style.display = "none";
+        }
+        eventsTable.hidden = false;
+
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${new Date(event.timestamp).toLocaleTimeString()}</td>
+          <td><span class="event-tag ${event.event}">${event.event}</span></td>
+          <td>${normaliseSummary(event)}</td>
+          <td><pre style="white-space: pre-wrap; font-size: 0.8rem; margin: 0;">${JSON.stringify(event, null, 2)}</pre></td>
+        `;
+
+        eventsBody.prepend(row);
+        while (eventsBody.children.length > 50) {
+          eventsBody.removeChild(eventsBody.lastChild);
+        }
+        lastUpdate.textContent = `Last event: ${new Date(event.timestamp).toLocaleTimeString()}`;
+      }
+
+      async function bootstrap() {
+        try {
+          const statusResponse = await fetch("/api/status");
+          const status = await statusResponse.json();
+          renderStatus(status);
+
+          const eventsResponse = await fetch("/api/events");
+          const eventsData = await eventsResponse.json();
+          (eventsData.events || []).forEach(renderEvent);
+        } catch (error) {
+          console.error("Failed to bootstrap UI", error);
+        }
+
+        const eventSource = new EventSource("/api/events/stream");
+        eventSource.onopen = () => {
+          sseStatus.textContent = "Live feed";
+          sseStatus.classList.remove("offline");
+        };
+        eventSource.onerror = () => {
+          sseStatus.textContent = "Disconnected";
+          sseStatus.classList.add("offline");
+        };
+        eventSource.onmessage = (message) => {
+          if (!message.data) {
+            return;
+          }
+          const payload = JSON.parse(message.data);
+          renderEvent(payload);
+        };
+      }
+
+      bootstrap();
+    </script>
+  </body>
+</html>

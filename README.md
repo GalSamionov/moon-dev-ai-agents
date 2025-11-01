@@ -107,6 +107,23 @@ Project updates will be posted in Discord, join here: [discord.gg/8UPuVZ53bh](ht
 
 ---
 
+## 🛠️ Zero-to-Running Checklist (5 Steps)
+If you're wondering "Do I download or clone, and how do I run this?" start here:
+
+1. **Get the code** – either
+   - Clone the repo: `git clone https://github.com/moon-dev/moon-dev-ai-agents.git`
+   - *or* download the ZIP from GitHub → extract it → open the `moon-dev-ai-agents` folder.
+2. **Open a terminal** inside that folder and (optionally) create/activate a virtual environment.
+3. **Install dependencies:** `pip install -r requirements.txt` (Python 3.10.9 recommended).
+4. **Copy `.env.example` to `.env`** and add at least one AI model key (Anthropic/OpenAI/DeepSeek/etc.) plus any market-data keys you plan to use.
+5. **Run something:**
+   - CLI workflow: `python -m src.projects.strategy_intel_hub.cli --help`
+   - Web dashboard: `python -m src.projects.strategy_intel_hub.web_cli --port 8083`
+
+> Need updates later? Run `git pull` inside the repo. Want to stop the workflows? Press `Ctrl+C` in the terminal window where they’re running.
+
+---
+
 ## 🚀 Quick Start Guide - RBI Backtesting Agent
 
 **Why Start with Backtesting?**
@@ -129,10 +146,30 @@ The RBI Agent takes your trading ideas (from YouTube videos, PDFs, or plain text
 - Fork to your GitHub account to get your own copy
 - This lets you make changes and track updates
 
-### Step 2: 💻 Clone to Your Machine
+### Step 2: 💻 Get the Code on Your Machine
 ```bash
-git clone https://github.com/YOUR_USERNAME/moon-dev-ai-agents-for-trading.git
-cd moon-dev-ai-agents-for-trading
+# Option A – clone the upstream repo (recommended)
+git clone https://github.com/moon-dev/moon-dev-ai-agents.git
+cd moon-dev-ai-agents
+
+# Option B – clone your fork if you created one
+# git clone https://github.com/YOUR_USERNAME/moon-dev-ai-agents.git
+# cd moon-dev-ai-agents
+```
+
+Prefer a ZIP download? Click the green **Code** button on GitHub → **Download ZIP**,
+extract it, and open the resulting `moon-dev-ai-agents` folder in your terminal.
+
+> 💡 **Seeing `Repository not found`?** Double-check that the repository name is
+> `moon-dev-ai-agents` (not "moon-dev-ai-agents-for-trading") and that you have
+> access to the URL. For private forks, sign into GitHub first. You can always
+> point a fork back to the upstream repo later with
+> `git remote add upstream https://github.com/moon-dev/moon-dev-ai-agents.git`.
+
+### Step 2.5: 🔁 Already cloned but need the latest changes?
+```bash
+cd moon-dev-ai-agents
+git pull origin main  # replace 'origin' if your remote has a different name
 ```
 
 **Recommended IDEs:**
@@ -191,6 +228,33 @@ Or using pip directly:
 ```bash
 pip install -r requirements.txt
 ```
+
+### Bonus: 🚀 Launch the Strategy & Intelligence Hub
+
+Once dependencies are installed you can run the combined research + market intelligence workflow that ships with this repo:
+
+```bash
+# Inspect the available options
+python -m src.projects.strategy_intel_hub.cli --help
+
+# Example: hourly research loop, 8-minute intel sweep, skip RBI backtests,
+# and write structured events to a JSONL log for later analysis
+python -m src.projects.strategy_intel_hub.cli \
+  --research-interval 60 \
+  --intel-interval 8 \
+  --no-backtests \
+  --event-log data/strategy_intel_hub/events.jsonl
+```
+
+Prefer a browser dashboard? Start the bundled FastAPI + SSE server instead:
+
+```bash
+python -m src.projects.strategy_intel_hub.web_cli --port 8083 --event-log data/strategy_intel_hub/ui_events.jsonl
+# or
+uvicorn src.projects.strategy_intel_hub.server:create_app --factory --port 8083
+```
+
+Open `http://localhost:8083` to watch live updates from the research and market monitoring cycles. Both entry points share the same configuration dataclasses, so you can tweak cadence or opt back into RBI backtesting without editing code. For deeper customization, see [docs/ai_strategy_intel_hub.md](docs/ai_strategy_intel_hub.md).
 
 ### Step 5: 🧪 Run Your First Backtest
 

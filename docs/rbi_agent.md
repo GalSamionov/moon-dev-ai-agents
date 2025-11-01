@@ -141,7 +141,7 @@ This strategy uses RSI oversold conditions..." > /path/to/strategies/strategy1.m
 #   - Perfect for web search agent integration!
 #
 STRATEGIES_FROM_FILES = False  # Set to True for file mode
-STRATEGIES_FOLDER = "/Users/md/Dropbox/dev/github/moon-dev-ai-agents-for-trading/src/data/web_search_research/final_strategies"
+STRATEGIES_FOLDER = "/Users/md/Dropbox/dev/github/moon-dev-ai-agents/src/data/web_search_research/final_strategies"
 ```
 
 ### Performance Settings
@@ -165,10 +165,10 @@ MODEL = "deepseek/deepseek-r1"
 
 ```python
 # Where OHLCV data is stored
-DATA_DIR = "/Users/md/Dropbox/dev/github/moon-dev-ai-agents-for-trading/src/data/rbi"
+DATA_DIR = "/Users/md/Dropbox/dev/github/moon-dev-ai-agents/src/data/rbi"
 
 # CSV file with strategy ideas (classic mode only)
-IDEAS_FILE = "/Users/md/Dropbox/dev/github/moon-dev-ai-agents-for-trading/src/data/rbi_pp_multi/ideas.txt"
+IDEAS_FILE = "/Users/md/Dropbox/dev/github/moon-dev-ai-agents/src/data/rbi_pp_multi/ideas.txt"
 ```
 
 ## Startup Messages
@@ -307,7 +307,7 @@ python src/agents/websearch_agent.py
 Edit `src/agents/rbi_agent_pp_multi.py` (lines 102-103):
 ```python
 STRATEGIES_FROM_FILES = True
-STRATEGIES_FOLDER = "/Users/md/Dropbox/dev/github/moon-dev-ai-agents-for-trading/src/data/web_search_research/final_strategies"
+STRATEGIES_FOLDER = "/Users/md/Dropbox/dev/github/moon-dev-ai-agents/src/data/web_search_research/final_strategies"
 ```
 
 **3. Run RBI Agent**:
@@ -690,4 +690,4 @@ All operations are thread-safe:
 
 *Part of the Moon Dev AI Agents for Trading project*
 
-**GitHub**: https://github.com/moon-dev-ai-agents-for-trading
+**GitHub**: https://github.com/moon-dev/moon-dev-ai-agents
