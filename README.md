@@ -196,6 +196,33 @@ Or using pip directly:
 pip install -r requirements.txt
 ```
 
+### Bonus: 🚀 Launch the Strategy & Intelligence Hub
+
+Once dependencies are installed you can run the combined research + market intelligence workflow that ships with this repo:
+
+```bash
+# Inspect the available options
+python -m src.projects.strategy_intel_hub.cli --help
+
+# Example: hourly research loop, 8-minute intel sweep, skip RBI backtests,
+# and write structured events to a JSONL log for later analysis
+python -m src.projects.strategy_intel_hub.cli \
+  --research-interval 60 \
+  --intel-interval 8 \
+  --no-backtests \
+  --event-log data/strategy_intel_hub/events.jsonl
+```
+
+Prefer a browser dashboard? Start the bundled FastAPI + SSE server instead:
+
+```bash
+python -m src.projects.strategy_intel_hub.web_cli --port 8083 --event-log data/strategy_intel_hub/ui_events.jsonl
+# or
+uvicorn src.projects.strategy_intel_hub.server:create_app --factory --port 8083
+```
+
+Open `http://localhost:8083` to watch live updates from the research and market monitoring cycles. Both entry points share the same configuration dataclasses, so you can tweak cadence or opt back into RBI backtesting without editing code. For deeper customization, see [docs/ai_strategy_intel_hub.md](docs/ai_strategy_intel_hub.md).
+
 ### Step 5: 🧪 Run Your First Backtest
 
 **Option A: Single Strategy Test**
